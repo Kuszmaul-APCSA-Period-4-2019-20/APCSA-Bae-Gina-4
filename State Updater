@@ -1,0 +1,68 @@
+package apcsa;
+
+public class StateUpdater {
+	/**
+	* Computes the position of an angled projectile in the air given the object's position, velocity, angle, and the time that has passed since the last update.
+	* @param x The object's position, velocity and the time.
+	* @return returns the final position of an object.
+	* @author GinaBae
+	*/
+	public static double[] updateStateAngledLaunch(double velocity, double time, double xpos, double ypos, double angle) {
+		/*
+		Calculates the horizontal velocity (Vx) and the vertical velocity (Vy) from the angle and the initial velocity.
+		*/
+		double xvel= velocity* Math.cos(angle*(Math.PI/180));
+		double yvel=velocity* Math.sin(angle*(Math.PI/180));
+		/*
+		Calculates the final position with physics theorems by calculating the x position and y position separately with the horizontal and vertical velocities.
+		*/
+		double newxpos= xpos+ xvel*time;
+		double newypos= ypos+(yvel*time)+(-9.8*time*time);
+		/*
+		Puts the x position and y position into a double array so it comes out as a coordinate when printed.
+		*/
+		double[] n= new  double[2];
+		n[0]=newxpos;
+		n[1] = newypos;
+		return n;
+	}
+	/**
+	* Computes the position of a projectile launched straight up given the object's position, velocity, and the time that has passed since the last update.
+	* @param x The object's position, velocity and the time.
+	* @return returns the final position of an object.
+	*/
+	public static double[] updateStateVerticalLaunch(double velocity, double time, double xpos, double ypos) {
+		/*
+		Calculates the final position with physics theorems by calculating the x position and y position separately with the horizontal and vertical velocities.
+		*/
+		double newxpos= xpos;
+		double newypos= ypos+(velocity*time)+(-9.8*time*time);
+		/*
+		Puts the x position and y position into a double array so it comes out as a coordinate when printed.
+		*/
+		double[] n= new  double[2];
+		n[0]=newxpos;
+		n[1] = newypos;
+		return n;
+	}
+	/**
+	* Computes the position of a projectile launched horizontally given the object's position, velocity, and the time that has passed since the last update.
+	* @param x The object's position, velocity and the time.
+	* @return returns the final position of an object.
+	*/
+	public static double[] updateStateHorizontalLaunch(double velocity, double time, double xpos, double ypos) {
+		/*
+		Calculates the final position with physics theorems by calculating the x position and y position separately with the horizontal and vertical velocities.
+		*/
+		double newxpos= xpos+ velocity*time;
+		double newypos= ypos+(-9.8*time*time);
+		/*
+		Puts the x position and y position into a double array so it comes out as a coordinate when printed.
+		*/
+		double[] n= new  double[2];
+		n[0]=newxpos;
+		n[1] = newypos;
+		return n;
+	}
+	
+}
