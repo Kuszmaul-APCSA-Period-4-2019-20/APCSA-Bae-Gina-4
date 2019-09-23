@@ -1,0 +1,75 @@
+package apcsa;
+
+public class StateUpdaterTest {
+	/**
+	* Tests the methods of the StateUpdater class.
+	* @author GinaBae
+	*/
+	public static void main(String[] args) {
+		/*
+		Tests cases of the updateStateVerticalLaunch method.
+		*/
+		
+		for (double i=0;i<=20; i++)
+			for (double e=0;e<=20; e++)
+				for (double r=0;r<=20; r++)
+					for (double w=0;w<=20; w++) {
+						double[] n= StateUpdater.updateStateVerticalLaunch(i, e, r, w);
+						double[]q = new double[2];
+						q[0]= r;
+						q[1]= w +(i*e)+(-9.8*e*e);
+						if ((n[0]==q[0])&& (n[1]==q[1]))
+							System.out.println("Vertical Launch Test successful!");
+						else
+							System.out.println("Vertical Launch Test failed.");
+				}
+		/*
+		Tests cases of the updateStateHorizontalLaunch method.
+		*/
+
+		for (double i=0;i<=20; i++)
+			for (double e=0;e<=20; e++)
+				for (double r=0;r<=20; r++)
+					for (double w=0;w<=20; w++) {
+						double[] n= StateUpdater.updateStateHorizontalLaunch(i, e, r, w);
+						double[]q = new double[2];
+						q[0]= r + (i * e);
+						q[1]= w +(-9.8*e*e);
+						if ((n[0]==q[0])&& (n[1]==q[1]))
+							System.out.println("Horizontal Launch Test successful!");
+						else
+							System.out.println("Horizontal Launch Test failed.");
+					}
+						
+		/*
+		Tests cases of the updateStateAngledLaunch method.
+		*/
+
+		for (double i=0;i<=20; i++)
+			for (double e=0;e<=20; e++)
+				for (double r=0;r<=20; r++)
+					for (double w=0;w<=20; w++) 
+						for (double z=0;z<=20; z++){
+							double[] n= StateUpdater.updateStateAngledLaunch(i, e, r, w, z);
+							double[]q = new double[2];
+							q[0]= r + (i* Math.cos(z*(Math.PI/180)) * e);
+							q[1]= w +(i* Math.sin(z*(Math.PI/180))*e)+(-9.8*e*e);
+							if ((n[0]==q[0])&& (n[1]==q[1]))
+								System.out.println("Angled Launch Test successful!");
+							else
+								System.out.println("Angled Launch Test failed.");
+					}
+		/*
+		Calls and prints out the result for each of the three StateUpdater methods.
+		*/
+						
+		double[] newverticalpos= StateUpdater.updateStateVerticalLaunch(4.0, 0.5, 5.0, 66.0);
+	    System.out.println("("+newverticalpos[0]+", "+newverticalpos[1]+")");
+	    double[] newangledpos= StateUpdater.updateStateAngledLaunch(3333.0, 1.0, 2.0, 0, -90);
+	    System.out.println("("+newangledpos[0]+", "+newangledpos[1]+")");
+	    double[] newhorizontalpos= StateUpdater.updateStateHorizontalLaunch(44.0, 0.5, 50.0, 6.0);
+	    System.out.println("("+newhorizontalpos[0]+", "+newhorizontalpos[1]+")");
+	   
+	}
+
+}
